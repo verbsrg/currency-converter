@@ -15,7 +15,7 @@ import { fetchAndSaveRates } from './_utils/FetchRates';
 
 export default async function Home() {
   fetchAndSaveRates();
-  const data = await getRates();
+  // const data = await getRates();
 
   return (
     <div className="bg-gradient-radial from-blue-500 via-blue-900">
@@ -23,7 +23,7 @@ export default async function Home() {
         <h1 className="font-extrabold text-[64px] text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-white">
           Currency converter
         </h1>
-        <CurrencyConverter {...data} />
+        {/* <CurrencyConverter {...data} /> */}
       </div>
     </div>
   );
