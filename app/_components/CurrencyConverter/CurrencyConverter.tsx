@@ -13,7 +13,7 @@ const CurrencyConverter: React.FC<ExchangeModel> = ({
   const [toCurrency, setToCurrency] = useState('USD');
   const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
 
-  const date = new Date(timestamp);
+  const date = new Date(timestamp * 1000);
 
   useEffect(() => {
     const rateFrom = rates[fromCurrency];
@@ -60,7 +60,7 @@ const CurrencyConverter: React.FC<ExchangeModel> = ({
         </select>
       </div>
       <div className="mt-5">
-        Rates last updated: <span>{date.toLocaleString()}</span>
+        Rates last updated: <span>{date.toUTCString()}</span>
       </div>
     </div>
   );

@@ -1,7 +1,10 @@
 import CurrencyConverter from '@/app/_components/CurrencyConverter/CurrencyConverter';
+import { fetchAndSaveRates } from './_utils/FetchRates';
 
 async function getRates() {
-  const res = await fetch('/api/rates');
+  const res = await fetch(process.env.URL + '/api/rates', {
+    next: { revalidate: 28800 },
+  });
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -11,6 +14,7 @@ async function getRates() {
 }
 
 export default async function Home() {
+  fetchAndSaveRates();
   const data = await getRates();
 
   return (
