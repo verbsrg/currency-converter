@@ -3,12 +3,12 @@ import ExchangeRate from "../models/ExchangeRate";
 
 export const fetchAndSaveRates = async () => {
     try {
-    const response = await fetch(`http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.API_KEY}`, { next: { revalidate: 28800 } })
-
+    const response = await fetch(`http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.API_KEY}`, {next: { revalidate: 28800 }})
+    
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
-
+    
     const responseData = await response.json()
     const { base, rates, timestamp } = responseData;
     
@@ -18,8 +18,8 @@ export const fetchAndSaveRates = async () => {
     const update = {
         $set: {
         baseCurrency: base,
-        rates,
-        timestamp,
+        rates: rates,
+        timestamp: timestamp,
         },
     };
     const options = { upsert: true };
